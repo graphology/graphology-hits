@@ -16,7 +16,7 @@ import hits from 'graphology-hits';
 // To compute and return the result as 'hubs' & 'authorities':
 const {hubs, authorities} = hits(graph);
 
-// To directly assign the map the result to nodes' attributes:
+// To directly map the result to nodes' attributes:
 hits.assign(graph);
 
 // Note that you can also pass options to customize the algorithm:
