@@ -1,0 +1,44 @@
+{
+  "name": "graphology-hits",
+  "version": "0.0.1",
+  "description": "HITS algorithm for graphology.",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint *.js",
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphology/graphology-hits.git"
+  },
+  "keywords": [
+    "graph",
+    "graphology",
+    "hits"
+  ],
+  "author": {
+    "name": "Guillaume Plique",
+    "url": "http://github.com/Yomguithereal"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphology/graphology-hits/issues"
+  },
+  "homepage": "https://github.com/graphology/graphology-hits#readme",
+  "devDependencies": {
+    "@yomguithereal/eslint-config": "^3.0.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.5.0",
+    "graphology": "0.1.0",
+    "mocha": "^3.0.2"
+  },
+  "eslintConfig": {
+    "extends": "@yomguithereal/eslint-config"
+  },
+  "dependencies": {
+    "lodash.defaultsdeep": "^4.6.0"
+  }
+}
