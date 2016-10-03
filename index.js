@@ -55,8 +55,7 @@ function sum(o) {
 
 /**
  * HITS function taking a Graph instance & some options and returning a map
- * of nodes to their hubs & authorities. Note that the function will
- * return null if the algorithm fails to converge.
+ * of nodes to their hubs & authorities.
  *
  * @param  {boolean} assign    - Should we assign the results as node attributes?
  * @param  {Graph}   graph     - A Graph instance.
