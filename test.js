@@ -45,7 +45,7 @@ describe('graphology-hits', function() {
   it('should throw if provided with something which is not a graph.', function() {
     assert.throws(function() {
       hits({hello: 'world'});
-    });
+    }, /graphology/);
   });
 
   it('should throw if provided with a MultiGraph.', function() {
