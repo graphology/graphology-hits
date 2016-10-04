@@ -4,7 +4,8 @@
  *
  * Implementation of the HITS algorithm for the graphology specs.
  */
-var defaults = require('lodash.defaultsdeep');
+var defaults = require('lodash.defaultsdeep'),
+    isGraph = require('graphology-utils/is-graph');
 
 /**
  * Defaults.
@@ -67,6 +68,9 @@ function sum(o) {
  *                                       convergence in power method iteration.
  */
 function hits(assign, graph, options) {
+  if (!isGraph(graph))
+    throw new Error('graphology-hits: the given graph is not a valid graphology instance.');
+
   if (graph.multi)
     throw new Error('graphology-hits: the HITS algorithm does not work with MultiGraphs.');
 
