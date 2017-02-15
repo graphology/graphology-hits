@@ -89,16 +89,14 @@ function hits(assign, graph, options) {
 
   // Iteration variables
   var node,
-      neighbors,
-      neighbor,
       edge,
+      bounds,
       iteration,
       maxAuthority,
       maxHub,
       error,
       s,
-      i,
-      j, m;
+      i;
 
   // Indexing weights
   for (i = 0; i < size; i++) {
@@ -114,38 +112,35 @@ function hits(assign, graph, options) {
     maxHub = 0;
     maxAuthority = 0;
 
-    // Iterating over nodes to update authorities
-    for (i = 0; i < order; i++) {
-      node = nodes[i];
-      neighbors = graph.outNeighbors(node)
-        .concat(graph.undirectedNeighbors(node));
+    // Iterating over edges to update authorities
+    for (i = 0; i < size; i++) {
+      edge = edges[i];
+      bounds = graph.extremities(edge);
 
-      // Iterating over neighbors
-      for (j = 0, m = neighbors.length; j < m; j++) {
-        neighbor = neighbors[j];
-        edge = graph.getEdge(node, neighbor);
+      authorities[bounds[1]] += lastHubs[bounds[0]] * weights[edge];
+      if (authorities[bounds[1]] > maxAuthority)
+        maxAuthority = authorities[bounds[1]];
 
-        authorities[neighbor] += lastHubs[node] * weights[edge];
-
-        if (authorities[neighbor] > maxAuthority)
-          maxAuthority = authorities[neighbor];
+      if (graph.undirected(edge)) {
+        authorities[bounds[0]] += lastHubs[bounds[1]] * weights[edge];
+        if (authorities[bounds[0]] > maxAuthority)
+          maxAuthority = authorities[bounds[0]];
       }
     }
 
-    // Iterating over nodes to update hubs
-    for (i = 0; i < order; i++) {
-      node = nodes[i];
-      neighbors = graph.outNeighbors(node)
-        .concat(graph.undirectedNeighbors(node));
+    // Iterating over edges to update hubs
+    for (i = 0; i < size; i++) {
+      edge = edges[i];
+      bounds = graph.extremities(edge);
 
-      for (j = 0, m = neighbors.length; j < m; j++) {
-        neighbor = neighbors[j];
-        edge = graph.getEdge(node, neighbor);
+      hubs[bounds[0]] += authorities[bounds[1]] * weights[edge];
+      if (hubs[bounds[0]] > maxHub)
+        maxHub = hubs[bounds[0]];
 
-        hubs[node] += authorities[neighbor] * weights[edge];
-
-        if (hubs[neighbor] > maxHub)
-          maxHub = hubs[neighbor];
+      if (graph.undirected(edge)) {
+        hubs[bounds[1]] += authorities[bounds[0]] * weights[edge];
+        if (hubs[bounds[1]] > maxHub)
+          maxHub = hubs[bounds[1]];
       }
     }
 
