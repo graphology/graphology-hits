@@ -89,7 +89,6 @@ function hits(assign, graph, options) {
 
   // Iteration variables
   var node,
-      neighbors,
       neighbor,
       edge,
       iteration,
@@ -117,13 +116,14 @@ function hits(assign, graph, options) {
     // Iterating over nodes to update authorities
     for (i = 0; i < order; i++) {
       node = nodes[i];
-      neighbors = graph.outNeighbors(node)
-        .concat(graph.undirectedNeighbors(node));
+      edges = graph
+        .outEdges(node)
+        .concat(graph.undirectedEdges(node));
 
       // Iterating over neighbors
-      for (j = 0, m = neighbors.length; j < m; j++) {
-        neighbor = neighbors[j];
-        edge = graph.getEdge(node, neighbor);
+      for (j = 0, m = edges.length; j < m; j++) {
+        edge = edges[j];
+        neighbor = graph.opposite(node, edge);
 
         authorities[neighbor] += lastHubs[node] * weights[edge];
 
@@ -135,12 +135,13 @@ function hits(assign, graph, options) {
     // Iterating over nodes to update hubs
     for (i = 0; i < order; i++) {
       node = nodes[i];
-      neighbors = graph.outNeighbors(node)
-        .concat(graph.undirectedNeighbors(node));
+      edges = graph
+        .outEdges(node)
+        .concat(graph.undirectedEdges(node));
 
-      for (j = 0, m = neighbors.length; j < m; j++) {
-        neighbor = neighbors[j];
-        edge = graph.getEdge(node, neighbor);
+      for (j = 0, m = edges.length; j < m; j++) {
+        edge = edges[j];
+        neighbor = graph.opposite(node, edge);
 
         hubs[node] += authorities[neighbor] * weights[edge];
 

@@ -50,7 +50,7 @@ describe('graphology-hits', function() {
 
   it('should throw if provided with a MultiGraph.', function() {
     assert.throws(function() {
-      var graph = new Graph(null, {multi: true});
+      var graph = new Graph({multi: true});
       hits(graph);
     }, /multi/i);
   });

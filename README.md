@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/graphology/graphology-hits.svg)](https://travis-ci.org/graphology/graphology-hits)
+
 # Graphology HITS
 
 HITS algorithm to be used with [`graphology`](https://graphology.github.io).
